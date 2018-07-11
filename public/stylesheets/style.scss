@@ -1,0 +1,38 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+ul.map {
+  position: absolute;
+  margin-bottom: 25%;
+  background-color: white;
+}
+
+ul.map li { 
+  float: left; 
+  margin: 0 25px 0 0; 
+  width: 120px; 
+  border: 0px solid; 
+  height: 45px; 
+  padding-left: 6px; 
+  list-style-type: none;
+}
+
+ul.map li a { 
+  margin: 0;
+  padding: 0; 
+  text-decoration:underline; 
+  font-size:12px; 
+  font-weight:normal; 
+  color:#4591b1;
+} 
+
+ul.map li a:hover { 
+  text-decoration:none; 
+  color:#214b6e;
+}
+
+iframe {
+  margin: 0 0 -2% 23%;
+}
