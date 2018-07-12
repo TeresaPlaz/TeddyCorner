@@ -6,4 +6,10 @@ router.get('/', (req, res, next) => {
   res.render('index');
 });
 
+//StateRoutes
+router.get('/:state', (req, res, next) => {
+  console.log(req.params.state);
+  res.render('index');
+});
+
 module.exports = router;
