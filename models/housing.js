@@ -7,6 +7,7 @@ const ObjectId = Schema.ObjectId;
 const houseSchema = new Schema({
   title: String,
   price: String,
+  motive: { type: String, enum: ['Rent','Sale']},
   state: [{ type : ObjectId, ref: 'State' }],
   ownerOfPost: [{ type : ObjectId, ref: 'User' }],
   image : String,

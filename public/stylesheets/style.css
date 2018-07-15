@@ -2,10 +2,14 @@ body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
 
-ul.map {
+.whiteBlock {
+  height: 5%;
+  width: 100%;
   position: absolute;
-  margin-bottom: 25%;
   background-color: white; }
+
+ul.map {
+  margin: 10% 0 0 0; }
 
 ul.map li {
   float: left;
@@ -29,6 +33,6 @@ ul.map li a:hover {
   color: #214b6e; }
 
 iframe {
-  margin: 0 0 -2% 23%; }
+  margin: 0 auto -4% auto; }
 
 /*# sourceMappingURL=style.css.map */
