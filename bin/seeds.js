@@ -1,11 +1,19 @@
-statesData = [
+const mongoose = require('mongoose');
+const STATES  = require('../models/states');
+const HOUSING = require('../models/housing');
+const dbtitle = 'project2';
+mongoose.connect(`mongodb://localhost/${dbtitle}`);
+STATES.collection.drop();
+
+const statesData = [
 { name: "Alabama"}, 
 { name: "Alaska"} ,
 { name: "Arizona"} ,
 { name: "Arkansas"} ,
 { name: "California"}, 
 { name: "Colorado"} ,
-{ name: "Connecticut"}, 
+{ name: "Connecticut"},
+{name: "District of Columbia"}, 
 { name: "Delaware"} ,
 { name: "Florida"},
 { name: "Georgia"},
@@ -51,3 +59,29 @@ statesData = [
 { name: "Wyoming"}
   
 ];
+
+const dummyHouses = [
+  {
+   title: 'Dummy',
+   price: 55,
+   state: 'AL'
+  }
+]; 
+
+STATES.create(statesData,(err) =>{
+
+  if(err) {throw err;}
+  console.log("Success");
+  mongoose.connection.close();
+
+});
+
+HOUSING.create(dummyHouses,(err) =>{
+
+  if(err) {throw err;}
+  console.log("Success");
+  mongoose.connection.close();
+
+});
+
+module.exports = STATES;

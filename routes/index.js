@@ -1,6 +1,7 @@
 const express = require('express');
 const router  = express.Router();
-const STATE   = require('../models/states');
+const STATES  = require('../models/states');
+const HOUSING = require('../models/housing');
 
 /* GET home page */
 router.get('/', (req, res, next) => {
@@ -10,11 +11,13 @@ router.get('/', (req, res, next) => {
 //StateRoutes
 router.get('/:state', (req, res, next) => {
   let stateAcronym = req.params.state;
-  STATE.findOne({stateAcronym}).then(state => {
-    if (!state) {
+  console.log(stateAcronym);
+  HOUSING.find({state: stateAcronym}).then(house => {
+    if (!house) {
       return res.status(404).render('not-found');
     }
-    res.render('index');
+    console.log(house);
+    res.render('houses/houses', {house});
   })
   .catch(next);
 });

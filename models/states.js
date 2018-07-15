@@ -3,8 +3,6 @@ const Schema   = mongoose.Schema;
 
 const stateSchema = new Schema({
   name: String,
-  category: [Array],
-    default: ['HOUSING', 'JOBS', 'GIGS'],
 }, {
   timestamps: { createdAt: "created_at", updatedAt: "updated_at" }
 });

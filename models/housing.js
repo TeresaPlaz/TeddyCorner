@@ -1,14 +1,14 @@
 const mongoose = require("mongoose");
 const Schema   = mongoose.Schema;
-const State    = require("./states");
+const STATES    = require("./states");
 const User     = require("./User");
 const ObjectId = Schema.ObjectId;
 
 const houseSchema = new Schema({
   title: String,
-  price: String,
+  price: Number,
   motive: { type: String, enum: ['Rent','Sale']},
-  state: [{ type : ObjectId, ref: 'State' }],
+  state: String,
   ownerOfPost: [{ type : ObjectId, ref: 'User' }],
   image : String,
   description: String,
