@@ -2,10 +2,18 @@ const express = require('express');
 const router  = express.Router();
 const STATES  = require('../models/states');
 const HOUSING = require('../models/housing');
+const ensureLogin    = require("connect-ensure-login");
+const User    = require('../models/User');
 
 /* GET home page */
 router.get('/', (req, res, next) => {
+  if (req.user) {
+    console.log(req.user);
+  res.render('index',{user: req.user});
+  }
+  else {
   res.render('index');
+  }
 });
 
 //StateRoutes

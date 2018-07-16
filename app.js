@@ -13,7 +13,8 @@ const session      = require('express-session');
 const passport     = require("passport");
 const LocalStrategy= require("passport-local").Strategy;
 const flash        = require("connect-flash");
-const FbStrategy   = require('passport-facebook').Strategy;
+const User         = require("./models/User");
+const MongoStore   = require('connect-mongo')(session);
 
 
 mongoose.Promise = Promise;
@@ -36,9 +37,14 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(session({
-  secret: "our-passport-local-strategy-app",
+  secret: "dummy4now",
   resave: true,
-  saveUninitialized: true
+  saveUninitialized: true,
+  cookie: { maxAge: 60000000 },
+  store: new MongoStore({
+    mongooseConnection: mongoose.connection,
+    ttl: 24 * 60 * 60 // 1 day
+  })
 }));
 
 // Express View engine setup
@@ -98,8 +104,8 @@ app.locals.title = 'Express - Generated with IronGenerator';
 const index = require('./routes/index');
 app.use('/', index);
 
-// const users = require('./routes/users');
-// app.use('/users', users);
+const users = require('./routes/users');
+app.use('/users', users);
 
 
 module.exports = app;
