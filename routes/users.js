@@ -62,9 +62,9 @@ router.get("/login", (req, res, next) => {
 });
 
 //LOG IN POST ROUTE
-router.post("/login", passport.authenticate("local", {
+router.post("/login", passport.authenticate("local-login", {
   successRedirect: "/",
-  failureRedirect: "/login",
+  failureRedirect: "/users/login",
   failureFlash: true,
   passReqToCallback: true
   })
@@ -107,15 +107,18 @@ router.post('/:id/edit', (req, res, next) => {
 
      let userId = req.params.id;
      const { username, password } = req.body;
+
+    const salt = bcrypt.genSaltSync(bcryptSalt);
+    const hashPass = bcrypt.hashSync(password, salt);
  
-        User.update({_id: userId}, { $set: { username, password }},{new: true})
+        User.update({_id: userId}, { $set: { username, password:hashPass }},{new: true})
          .then((e) => {
               res.redirect('/');
          })
           .catch((error) => {
             console.log(error);
           });
-});
+    });
 
 //TYPE OF USER CHECKING FUNCTION, NOT YET APPLIED
 function checkRoles(role) {
@@ -132,6 +135,7 @@ function checkRoles(role) {
 router.post('/:id/delete', (req, res, next) => {
 
   let userId = req.params.id;
+  console.log(req.params.id);
   User.findByIdAndRemove(userId)
     .then(user => {
       if (!user) {
@@ -142,6 +146,5 @@ router.post('/:id/delete', (req, res, next) => {
     })
     .catch(next);
 });
-  
 
 module.exports = router;

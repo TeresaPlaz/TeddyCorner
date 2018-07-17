@@ -1,6 +1,8 @@
 <h2>Extra info</h2>
 <div>
   <p>Username: {{this.username}}</p>
+  <p><a href="/users/{{this.id}}/edit">Edit your profile</a></p>
+  <p><form action="/users/{{this.id}}/delete" method="post"> <input type="submit" value="DELETE"></input></form></p>
 </div>
 
 <a href="/">Go back</a>

@@ -10,7 +10,7 @@ const houseSchema = new Schema({
   motive: { type: String, enum: ['Rent','Sale']},
   state: String,
   ownerOfPost: [{ type : ObjectId, ref: 'User' }],
-  image : String,
+  imagePath : String,
   description: String,
 }, {
   timestamps: { createdAt: "created_at", updatedAt: "updated_at" }

@@ -3,6 +3,7 @@ const Schema   = mongoose.Schema;
 
 const stateSchema = new Schema({
   name: String,
+  acronym: String,
 }, {
   timestamps: { createdAt: "created_at", updatedAt: "updated_at" }
 });

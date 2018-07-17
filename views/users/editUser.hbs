@@ -5,7 +5,14 @@
   <input type="text" name="username" value="{{this.username}}">
 
   <label for="">Password:</label>
-  <input type="text" name="password" value="{{this.password}}">
+  <input type="password" name="password">
 
-  <button type="submit">UPDATE</button>
+  <label for="">Retype password:</label>
+  <input type="password" name="password2">
+
+  {{#if message}}
+    <div class="error-message">{{ message }}</div>
+  {{/if}}
+
+  <button id="updateButton" type="submit">UPDATE</button>
 </form>

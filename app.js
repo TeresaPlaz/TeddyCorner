@@ -70,7 +70,9 @@ passport.deserializeUser((id, cb) => {
 
 
   app.use(flash());
-  passport.use(new LocalStrategy({
+  
+  
+  passport.use("local-login", new LocalStrategy({
     passReqToCallback: true
   }, (req, username, password, next) => {
     User.findOne({ username }, (err, user) =>  {
@@ -78,15 +80,16 @@ passport.deserializeUser((id, cb) => {
       return next(err);
     }
     if (!user) {
-      return next(null, false, { message: "Incorrect username!!!" });
+      return next(null, false, { message: "Your username or your password is incorrect!!!" });
     }
     if (!bcrypt.compareSync(password, user.password)) {
-      return next(null, false, { message: "Incorrect password" });
+      return next(null, false, { message: "Your username or your password is incorrect!!!" });
     }
 
     return next(null, user);
-  });
-}));
+     });
+  })
+);
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -102,6 +105,9 @@ app.use('/', index);
 
 const users = require('./routes/users');
 app.use('/users', users);
+
+const addClassifieds = require('./routes/addClassifieds');
+app.use("/Classifieds",addClassifieds);
 
 
 module.exports = app;

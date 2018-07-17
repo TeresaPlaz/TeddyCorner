@@ -1,8 +1,10 @@
 {{#if user}}
-<a href="/users/logout">Logout</a> <br/>
+<p><a href="/users/{{user.id}}">Profile</a></p>
+<p><a href="/Classifieds/addHousing">Add classifieds</a></p>
+<p><a href="/users/logout">Logout</a> <br/></p>
 {{else}}
-<a href="/users/login">Log in</a> </br>
-<a href="/users/signup">Sign up</a> </br>
+<p><a href="/users/login">Log in</a></p>
+<p><a href="/users/signup">Sign up</a></p>
 {{/if}}
 
 <iframe src="https://createaclickablemap.com/map.php?&id=72496&maplocation=false&online=true" width="900" height="525" style="border: none;"></iframe><div class="whiteBlock"></div>
