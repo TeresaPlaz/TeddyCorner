@@ -3,9 +3,8 @@ const router         = express.Router();
 const ensureLogin    = require("connect-ensure-login");
 const STATES         = require("../models/states");
 const multer         = require('multer');
-const Picture        = require('../models/picture');
-const upload         = multer({ dest: './public/images/' });
 const HOUSING        = require('../models/housing');
+const uploadCloud = require('../config/cloudinary.js');
 
 router.get('/addHousing',(req,res,next) => {
   STATES.find().sort({name:1}).then(states => {
