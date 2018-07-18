@@ -1,6 +1,6 @@
  <h2>Add New House/Apt</h2>
 
-<form action="/Classifieds/Yours" method="post" id="HouseForm" enctype="multipart/form-data">
+<form action="/Classifieds/addHousing" method="post" enctype="multipart/form-data">
   <label for="">Title:</label>
   <input type="text" name="title"> <br/>
 
@@ -8,19 +8,19 @@
   <input type="number" name="price"> <br/>
 
   <label for="">Motive:</label>
-  <input type="radio" name="motive" value="rent"> Rent
-  <input type="radio" name="motive" value="sale"> Sale
+  <input type="radio" name="motive" value="Rent"> Rent
+  <input type="radio" name="motive" value="Sale"> Sale
   <br/>
 
   <label for="">State:</label>
-  <select name="state" form="HouseForm">
+  <select name="state">
     {{#each states}}
       <option value="{{this.acronym}}">{{this.name}}</option>
     {{/each}}
   </select> <br/>
 
   <label for="">Images:</label>
-  <input type="file" name="photo"> <br/>
+  <input type="file" name="photo" multiple> <br/>
 
   <label for="">Description:</label>
   <input type="text" name="description"> <br/>
@@ -29,5 +29,5 @@
     <div class="error-message">{{ message }}</div>
   {{/if}}
 
-  <button id="updateButton" type="submit" value="SAVE">UPDATE</button>
+  <button type="submit" value="SAVE">UPDATE</button>
 </form>

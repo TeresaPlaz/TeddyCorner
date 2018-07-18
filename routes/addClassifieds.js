@@ -4,9 +4,9 @@ const ensureLogin    = require("connect-ensure-login");
 const STATES         = require("../models/states");
 const multer         = require('multer');
 const HOUSING        = require('../models/housing');
-const uploadCloud = require('../config/cloudinary.js');
+const uploadCloud    = require('../config/cloudinary');
 
-router.get('/addHousing',(req,res,next) => {
+router.get("/addHousing",(req,res,next) => {
   STATES.find().sort({name:1}).then(states => {
     if (!states) {
       return res.status(404).render('not-found');
@@ -15,32 +15,24 @@ router.get('/addHousing',(req,res,next) => {
   });
 });
 
-router.post('/addHousing', upload.single('photo'), (req, res) => {
+router.post("/addHousing", uploadCloud.single('photo'), (req, res, next) => {
 
-  const { title, price, motive, state, description } = req.body;
+   const { title, price, motive, state, description } = req.body;
+    console.log(req.file);
+   const imagePath = req.file.url;
+   const imageName = req.file.originalname;
+   console.log("here2");
+   const newHouse = new HOUSING({title, price, motive, state, description, imagePath, imageName });
+   console.log(newHouse);
+   newHouse.save((err) => {
+     if (err) {
+       res.render("houses/addHouse", { message: "Something went wrong" });
+     } else {
+       res.redirect("/");
+     }
+   });
+ });
 
-  const newHouse = new HOUSING({title, price, motive, state, description, });
-
-  const pic = new Picture({
-    name: req.body.name,
-    path: `/images/${req.file.filename}`,
-    originalName: req.file.originalname
-  });
-
-  pic.save((err) => {
-      res.redirect('/');
-  });
-});
-
-//   newCelebrity.save()
-//   .then((celebrity) => {
-//     res.redirect('/celebrities')
-//   })
-//   .catch((error) => {
-//     console.log(error)
-//     res.redirect('/celebrities/add')
-//   })
-// });
-
+ 
 
 module.exports = router;

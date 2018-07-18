@@ -9,8 +9,9 @@ const houseSchema = new Schema({
   price: Number,
   motive: { type: String, enum: ['Rent','Sale']},
   state: String,
-  ownerOfPost: [{ type : ObjectId, ref: 'User' }],
-  imagePath : String,
+  ownerOfPost: String,
+  imagePath: String,
+  imageName: String ,
   description: String,
 }, {
   timestamps: { createdAt: "created_at", updatedAt: "updated_at" }
