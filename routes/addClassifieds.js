@@ -125,14 +125,28 @@ router.post('/:id/edit', uploadCloud.single('photo'), (req, res, next) => {
 //DELETING HOUSE ROUTE
 router.post('/:id/delete', (req, res, next) => {
 
-let userId = req.params.id;
-User.findByIdAndRemove(userId)
-.then(user => {
-  if (!user) {
+let houseId = req.params.id;
+HOUSING.findByIdAndRemove(houseId)
+.then(house => {
+  if (!house) {
     return res.status(404).render('not-found');
 }
-  console.log('Deleting succes!!');
-  res.redirect('/');
+      const ownerOfPost = req.user._id;
+      const destroyingTheHouse = req.user.classifieds.indexOf(houseId);
+
+      console.log(destroyingTheHouse);
+      req.user.classifieds.splice(destroyingTheHouse,1);
+
+      const classifieds = req.user.classifieds;
+
+      User.update({_id: ownerOfPost}, { $set: { classifieds }},{new: true})
+      .then((e) => {
+          console.log('Deleting succes!!');
+          res.redirect('/');
+      })
+      .catch((error) => {
+        console.log(error);
+      });
 })
 .catch(next);
 });
