@@ -19,7 +19,7 @@ const MongoStore   = require('connect-mongo')(session);
 
 mongoose.Promise = Promise;
 mongoose
-  .connect('mongodb://localhost/project2', {useMongoClient: true})
+  .connect(process.env.MONGODB_URI, {useMongoClient: true})
   .then(() => {
     console.log('Connected to Mongo!');
   }).catch(err => {
@@ -37,7 +37,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(session({
-  secret: "dummy4now",
+  secret: process.env.MYSECRETGGG,
   resave: true,
   saveUninitialized: true,
   cookie: { maxAge: 60000000 },
@@ -93,11 +93,6 @@ passport.deserializeUser((id, cb) => {
 
 app.use(passport.initialize());
 app.use(passport.session());
-
-
-// default value for title local
-app.locals.title = 'Express - Generated with IronGenerator';
-
 
 
 const index = require('./routes/index');
