@@ -22,6 +22,8 @@ router.post("/addHousing", uploadCloud.single('photo'), (req, res, next) => {
 
    const imagePath = req.file.url;
    const imageName = req.file.originalname;
+
+   console.log(req.user);
    const ownerOfPost = req.user._id;
    const newHouse = new HOUSING({title, price, motive, state, ownerOfPost, description, imagePath, imageName });
    
