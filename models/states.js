@@ -4,6 +4,7 @@ const Schema   = mongoose.Schema;
 const stateSchema = new Schema({
   name: String,
   acronym: String,
+  classifieds: [{ type: Schema.Types.ObjectId, ref: 'Housing' }]
 }, {
   timestamps: { createdAt: "created_at", updatedAt: "updated_at" }
 });

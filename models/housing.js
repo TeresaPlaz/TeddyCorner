@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const Schema   = mongoose.Schema;
-const STATES    = require("./states");
 const User     = require("./User");
 
 const houseSchema = new Schema({
