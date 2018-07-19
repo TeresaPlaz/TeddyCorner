@@ -1,5 +1,6 @@
  <h2>Edit profile</h2>
 
+
 <form action="/users/{{this.id}}/edit" method="post">
   <label for="">Username:</label>
   <input type="text" name="username" value="{{this.username}}">
@@ -9,6 +10,7 @@
 
   <label for="">Retype password:</label>
   <input type="password" name="password2">
+
 
   {{#if message}}
     <div class="error-message">{{ message }}</div>

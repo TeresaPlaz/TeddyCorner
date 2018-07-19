@@ -1,0 +1,35 @@
+<h2>Edit house</h2>
+
+
+<form action="/Classifieds/{{this.id}}/edit" method="post" enctype="multipart/form-data">
+  <label for="">Title:</label>
+  <input type="text" name="title" value="{{this.title}}"> <br/>
+
+  <label for="">Price:</label>
+  <input type="number" name="price" value="{{this.price}}"> <br/>
+
+  <label for="">Motive:</label>
+  <input type="radio" name="motive" value="Rent" checked="checked"> Rent
+  <input type="radio" name="motive" value="Sale"> Sale
+  <p>Currently set to {{this.motive}}</p>
+  <br/>
+
+  <label for="">State:</label>
+  <select name="state">
+    {{#each states}}
+      <option value="{{this.acronym}}">{{this.name}}</option>
+    {{/each}}
+  </select> <br/>
+
+  <label for="">Images:</label>
+  <input type="file" name="photo" multiple> <br/>
+
+  <label for="">Description:</label>
+  <input type="text" name="description" value="{{this.description}}"> <br/>
+
+  {{#if message}}
+    <div class="error-message">{{ message }}</div>
+  {{/if}}
+
+  <button id="updateButton" type="submit">UPDATE</button>
+</form>

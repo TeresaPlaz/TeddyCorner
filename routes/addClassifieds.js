@@ -19,6 +19,7 @@ router.get("/addHousing",(req,res,next) => {
 router.post("/addHousing", uploadCloud.single('photo'), (req, res, next) => {
 
    const { title, price, motive, state, description } = req.body;
+
    const imagePath = req.file.url;
    const imageName = req.file.originalname;
    const ownerOfPost = req.user._id;
@@ -57,37 +58,58 @@ console.log(error);
 });
 });
 
-//  router.get('/:id/edit', (req, res, next) => {
-//   let userId = req.params.id;
-//   User.findById(userId)
-//    .then(user => {
-//       if (!user) {
-//         return res.status(404).render('not-found');
-//     }
-// res.render("users/editUser", user);
-// })
-// .catch((error) => {
-// console.log(error);
-// });
-// });
+ router.get('/:id/edit', (req, res, next) => {
+  let houseId = req.params.id;
+  HOUSING.findById(houseId)
+   .then(house => {
+      if (!house) {
+        return res.status(404).render('not-found');
+    }
 
-// //POST ROUTE FOR USER PROFILE EDITING
-// router.post('/:id/edit', (req, res, next) => {
+    STATES.find().sort({name:1}).then(states => {
+      if (!states) {
+        return res.status(404).render('not-found');
+      }
+      res.render("houses/editHouse", {states, id: houseId, title: house.title, price: house.price, motive: house.motive, description: house.description});
+    });
+})
+.catch((error) => {
+console.log(error);
+});
+});
 
-//  let userId = req.params.id;
-//  const { username, password } = req.body;
+//POST ROUTE FOR HOUSE PROFILE EDITING
+router.post('/:id/edit', uploadCloud.single('photo'), (req, res, next) => {
 
-// const salt = bcrypt.genSaltSync(bcryptSalt);
-// const hashPass = bcrypt.hashSync(password, salt);
+  let houseId = req.params.id;
 
-//     User.update({_id: userId}, { $set: { username, password:hashPass }},{new: true})
-//      .then((e) => {
-//           res.redirect('/');
-//      })
-//       .catch((error) => {
-//         console.log(error);
-//       });
-// });
+  const { title, price, motive, state, description } = req.body;
+
+      if (req.file) {
+      const imagePath = req.file.url;
+      const imageName = req.file.originalname;
+
+      HOUSING.update({_id: houseId}, { $set: {title, price, motive, state, description, imagePath, imageName }},{new: true})
+      .then((e) => {
+           res.redirect('/');
+      })
+       .catch((error) => {
+         console.log(error);
+       });
+           }
+           else {
+            
+            HOUSING.update({_id: houseId}, { $set: {title, price, motive, state, description }},{new: true})
+      .then((e) => {
+           res.redirect('/');
+      })
+       .catch((error) => {
+         console.log(error);
+       });
+
+           }
+                
+});
 
 // //TYPE OF USER CHECKING FUNCTION, NOT YET APPLIED
 // function checkRoles(role) {
@@ -100,20 +122,19 @@ console.log(error);
 // };
 // }
 
-// //DELETING USER/ACCOUNT ROUTE
-// router.post('/:id/delete', (req, res, next) => {
+//DELETING HOUSE ROUTE
+router.post('/:id/delete', (req, res, next) => {
 
-// let userId = req.params.id;
-// console.log(req.params.id);
-// User.findByIdAndRemove(userId)
-// .then(user => {
-//   if (!user) {
-//     return res.status(404).render('not-found');
-// }
-//   console.log('Deleting succes!!');
-//   res.redirect('/');
-// })
-// .catch(next);
-// });
+let userId = req.params.id;
+User.findByIdAndRemove(userId)
+.then(user => {
+  if (!user) {
+    return res.status(404).render('not-found');
+}
+  console.log('Deleting succes!!');
+  res.redirect('/');
+})
+.catch(next);
+});
 
 module.exports = router;

@@ -20,23 +20,25 @@ router.get('/signup', (req, res) => {
 
 //SIGN UP POST ROUTE
 router.post("/signup", (req, res, next) => {
-const username = req.body.username;
-const password = req.body.password;
+
+    const { username, password, password2 } = req.body;
 
     if (username === "" || password === "") {
       res.render("users/newUser", { message: "Indicate username and password" });
       return;
     }
 
-    User.findOne({ username })
+    if (password === password2) {
+
+      User.findOne({ username })
       .then(user => {
          if (user !== null) {
            res.render("users/newUser", { message: "The username already exists" });
            return;
        }
-
-  const salt = bcrypt.genSaltSync(bcryptSalt);
-  const hashPass = bcrypt.hashSync(password, salt);
+      
+    const salt = bcrypt.genSaltSync(bcryptSalt);
+    const hashPass = bcrypt.hashSync(password, salt);
 
     const newUser = new User({
       username,
@@ -54,6 +56,10 @@ const password = req.body.password;
     .catch(error => {
       next(error);
     });
+    }  
+      else {
+        res.render("users/newUser", {message: "Passwords don't match"});
+      }  
 });
 
 //LOG IN GET ROUTE
@@ -82,7 +88,7 @@ router.get('/:id', (req, res, next) => {
             if (!user) {
               return res.status(404).render('not-found');
             }
-        res.render("users/profile", user);
+      res.render("users/profile", user);
       })
     .catch(next);
 });
@@ -106,18 +112,27 @@ router.get('/:id/edit', (req, res, next) => {
 router.post('/:id/edit', (req, res, next) => {
 
      let userId = req.params.id;
-     const { username, password } = req.body;
+     const { username, password, password2 } = req.body;
 
-    const salt = bcrypt.genSaltSync(bcryptSalt);
-    const hashPass = bcrypt.hashSync(password, salt);
- 
-        User.update({_id: userId}, { $set: { username, password:hashPass }},{new: true})
-         .then((e) => {
-              res.redirect('/');
-         })
-          .catch((error) => {
-            console.log(error);
-          });
+     if (password === password2) {
+
+      const salt = bcrypt.genSaltSync(bcryptSalt);
+      const hashPass = bcrypt.hashSync(password, salt);
+   
+          User.update({_id: userId}, { $set: { username, password:hashPass }},{new: true})
+           .then((e) => {
+                res.redirect('/');
+           })
+            .catch((error) => {
+              console.log(error);
+            });
+     }
+      else {
+        res.render("users/editUser", {message: "Passwords don't match", id: userId });
+      }
+     
+
+    
     });
 
 //TYPE OF USER CHECKING FUNCTION, NOT YET APPLIED
