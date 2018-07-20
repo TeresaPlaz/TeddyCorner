@@ -1,16 +1,23 @@
 <h2>Your Classifieds</h2>
-<div>
-  <div>{{#each populated.classifieds}}
-  <img src="{{this.imagePath}}"/>
-  <p> Title:{{this.title}}</p>
-  <p> Price: {{this.price}}</p>
-  <p>motive: {{this.motive}}</p>
-  <p>state: {{this.state}}</p>
-  <p>description: {{this.description}}</p>
+<div class="postContainer">
+    
+  {{#each populated.classifieds}}
+      <div class="actualPost"> 
+        <img src="{{this.imagePath}}"/>
+        <p> Title:{{this.title}}</p>
+        <p> Price: {{this.price}}</p>
+        <p>motive: {{this.motive}}</p>
+        <p>state: {{this.state}}</p>
+        <p>description: {{this.description}}</p>
 
-  <p><a href="/Classifieds/{{this.id}}/edit">Edit</a></p>
-  {{!-- <p><a href="/Classifieds/{{this.id}}/Yours">See your classifieds</a></p> --}}
-  <p><form action="/Classifieds/{{this.id}}/delete" method="post"> <input type="submit" value="DELETE"></input></form></p>
+        <p>
+          <a href="/Classifieds/{{this.id}}/edit">Edit</a>
+        </p>
+        {{!-- <p><a href="/Classifieds/{{this.id}}/Yours">See your classifieds</a></p> --}}
+        <p>
+          <form action="/Classifieds/{{this.id}}/delete" method="post"> <input type="submit" value="DELETE"></input></form>
+        </p>
+      </div>
   {{/each}}
 </div>
 

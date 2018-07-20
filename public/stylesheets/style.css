@@ -3,11 +3,21 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
 
 img {
-  width: 30%;
-  height: 30%; }
+  width: 200px;
+  height: 200px; }
+
+.postContainer {
+  display: flex; }
+
+.actualPost {
+  flex: 1;
+  justify-content: stretch;
+  flex-basis: 60%;
+  padding: 2%;
+  border: 1px black solid; }
 
 .whiteBlock {
-  height: 5%;
+  height: 10%;
   width: 100%;
   position: absolute;
   background-color: white; }
