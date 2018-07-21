@@ -1,20 +1,23 @@
  <h2>Edit profile</h2>
 
-
 <form action="/users/{{this.id}}/edit" method="post">
-  <label for="">Username:</label>
-  <input type="text" name="username" value="{{this.username}}">
-
-  <label for="">Password:</label>
-  <input type="password" name="password">
-
-  <label for="">Retype password:</label>
-  <input type="password" name="password2">
-
+  <div class="form-group">
+    <label for="example1">Username:</label>
+    <input type="text" name="username" value="{{this.username}}" class="form-control" id="example1">
+    <small class="form-text text-muted">Pick something cool, m8</small>
+  </div>
+  <div class="form-group">
+    <label for="example2">Password:</label>
+    <input type="password" class="form-control" id="example2" name="password">
+  </div>
+  <div class="form-group">
+    <label for="example3">Retype password:</label>
+    <input type="password" class="form-control" id="example3" name="password2">
+  </div>
 
   {{#if message}}
     <div class="error-message">{{ message }}</div>
   {{/if}}
 
-  <button id="updateButton" type="submit">UPDATE</button>
+  <button  id="updateButton" type="submit" class="btn btn-primary">Update</button>
 </form>

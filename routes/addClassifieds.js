@@ -23,7 +23,6 @@ router.post("/addHousing", uploadCloud.single('photo'), (req, res, next) => {
    const imagePath = req.file.url;
    const imageName = req.file.originalname;
 
-   console.log(req.user);
    const ownerOfPost = req.user._id;
    const newHouse = new HOUSING({title, price, motive, state, ownerOfPost, description, imagePath, imageName });
    
@@ -136,7 +135,6 @@ HOUSING.findByIdAndRemove(houseId)
       const ownerOfPost = req.user._id;
       const destroyingTheHouse = req.user.classifieds.indexOf(houseId);
 
-      console.log(destroyingTheHouse);
       req.user.classifieds.splice(destroyingTheHouse,1);
 
       const classifieds = req.user.classifieds;

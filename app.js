@@ -40,6 +40,10 @@ app.use(session({
   resave: true,
   saveUninitialized: true,
   cookie: { maxAge: 60000000 },
+  store: new MongoStore({
+    mongooseConnection: mongoose.connection,
+    ttl: 10 * 60 * 60 // 10 hours
+  })
 }));
 
 // Express View engine setup

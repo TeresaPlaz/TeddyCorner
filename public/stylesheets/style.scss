@@ -1,11 +1,18 @@
-body {
-  padding: 50px;
+
+body { 
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 img {
   width: 200px;
   height: 200px;
+}
+
+.container-fluid {
+  padding-right:0;
+  padding-left:0;
+  margin-right:auto;
+  margin-left:auto
 }
 
 .whiteBlock {
@@ -16,7 +23,7 @@ img {
 }
 
 ul.map {
-  margin: 10% 0 0 0;
+  margin: 6% 0 0 5%;
 }
 
 ul.map li { 
@@ -31,11 +38,11 @@ ul.map li {
 
 ul.map li a { 
   margin: 0;
-  padding: 0; 
-  text-decoration:underline; 
+  padding: 0;
+  text-decoration:none; 
   font-size:12px; 
   font-weight:normal; 
-  color:#4591b1;
+  color: darkorange; 
 } 
 
 ul.map li a:hover { 
@@ -44,5 +51,5 @@ ul.map li a:hover {
 }
 
 iframe {
-  margin: 0 auto -4% auto;
+  margin: 3% 0 -2% 25%;
 }
