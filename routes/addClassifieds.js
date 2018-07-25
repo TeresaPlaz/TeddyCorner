@@ -111,8 +111,12 @@ router.post('/:id/edit', uploadCloud.single('photo'), (req, res, next) => {
 
   let houseId = req.params.id;
 
-  const { title, price, motive, state, pets, laundry, available, description } = req.body;
+  let { title, price, motive, state, pets, laundry, available, description } = req.body;
 
+      console.log(pets,available,laundry);
+      if (pets === undefined) {pets = "No";}
+      if (laundry === undefined) {laundry = "No";}
+      if (available === undefined) {available = "No";}
       if (req.file) {
       const imagePath = req.file.url;
       const imageName = req.file.originalname;

@@ -1,3 +1,5 @@
+<div class="container">
+
 <h3>Edit house</h3>
 
 <form action="/Classifieds/{{this.id}}/edit" method="post" enctype="multipart/form-data">
@@ -7,10 +9,13 @@
   <input type="text" class="form-control" name="title" value="{{this.title}}" id="titleEdit">
 </div>
 
-<div class="form-group">
-  <label for="priceEdit">Price:</label>
-  <input type="number" class="form-control" id="priceEdit" name="price" value="{{this.price}}">
+<div class="input-group mb-3">
+<div class="input-group-prepend">
+  <span class="input-group-text">$</span>
+  </div>
+  <input type="number" class="form-control" id="priceEdit" name="price" value="{{this.price}}" aria-label="Dollar amount (with dot and two decimal places)">
 </div>
+
 
 <div class="form-check form-check-inline">
   <input class="form-check-input" type="radio" name="motive" value="Rent" checked>
@@ -32,9 +37,11 @@
   </select>
 </div>
 
-<div class="form-group">
-  <label for="imageEdit">Images:</label>
-  <input type="file" class="form-control-file" id="imageEdit" name="photo" multiple>
+<div class="input-group">
+  <div class="custom-file">
+    <input type="file"  name="photo" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04">
+    <label class="custom-file-label" for="inputGroupFile04">Images</label>
+  </div>
 </div>
 
 <div class="form-check">
@@ -65,3 +72,4 @@
 
   <button id="updateButton" type="submit" class="btn btn-primary">UPDATE</button>
 </form>
+</div>

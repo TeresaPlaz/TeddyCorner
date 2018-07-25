@@ -22,7 +22,13 @@ router.get('/:state', (req, res, next) => {
     if (!house) {
       return res.status(404).render('not-found');
     }
-    res.render('houses/houses', {house});
+
+    STATES.find().sort({name:1}).then(states => {
+      if (!states) {
+        return res.status(404).render('not-found');
+      }
+    res.render('houses/houses', {house, states});
+    });
   })
   .catch(next);
 });
