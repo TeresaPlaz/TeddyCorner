@@ -98,7 +98,7 @@ console.log(error);
       if (!states) {
         return res.status(404).render('not-found');
       }
-      res.render("houses/editHouse", {states, id: houseId, title: house.title, price: house.price, motive: house.motive, description: house.description});
+      res.render("houses/editHouse", {states, id: houseId, title: house.title, price: house.price, motive: house.motive, available: house.available, pets: house.pets, laundry: house.laundry, description: house.description});
     });
 })
 .catch((error) => {
@@ -117,7 +117,7 @@ router.post('/:id/edit', uploadCloud.single('photo'), (req, res, next) => {
       const imagePath = req.file.url;
       const imageName = req.file.originalname;
 
-      HOUSING.update({_id: houseId}, { $set: {title, price, motive, state, description, imagePath, imageName }},{new: true})
+      HOUSING.update({_id: houseId}, { $set: {title, price, motive, state, description, pets, laundry, available, imagePath, imageName }},{new: true})
       .then((e) => {
            res.redirect('/');
       })
@@ -127,7 +127,7 @@ router.post('/:id/edit', uploadCloud.single('photo'), (req, res, next) => {
            }
            else {
             
-            HOUSING.update({_id: houseId}, { $set: {title, price, motive, state, description }},{new: true})
+            HOUSING.update({_id: houseId}, { $set: { title, price, motive, state, pets, laundry, available, description }},{new: true})
       .then((e) => {
            res.redirect('/');
       })

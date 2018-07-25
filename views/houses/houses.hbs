@@ -1,10 +1,15 @@
 
 <div>{{#each house}}
+  {{#if imagePath}}
   <img src="{{this.imagePath}}">
+  {{/if}}
   <p> Title:{{this.title}}</p>
   <p> Price: {{this.price}}</p>
   <p>motive: {{this.motive}}</p>
   <p>state: {{this.state}}</p>
+  <p>Pets ok: {{this.pets}}</p>
+  <p>Laundry on site: {{this.laundry}}</p>
+  <p>Available now: {{this.available}}</p>
   <p>description: {{this.description}}</p>
   {{/each}}
 </div>

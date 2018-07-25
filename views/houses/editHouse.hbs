@@ -25,65 +25,43 @@
 
 <div class="form-group">
   <label for="controlSelectEdit">State:</label>
-  <select name="state">
+  <select class="form-control" id="controlSelectEdit" name="state">
     {{#each states}}
       <option value="{{this.acronym}}">{{this.name}}</option>
     {{/each}}
   </select>
 </div>
 
-  <label for="">Images:</label>
-  <input type="file" name="photo" multiple> <br/>
+<div class="form-group">
+  <label for="imageEdit">Images:</label>
+  <input type="file" class="form-control-file" id="imageEdit" name="photo" multiple>
+</div>
 
-  <label for="">Description:</label>
-  <input type="text" name="description" value="{{this.description}}"> <br/>
+<div class="form-check">
+  <input class="form-check-input" name="pets" type="checkbox" value="Yes" id="checkEdit1">
+  <label class="form-check-label" for="checkEdit1"> Pets ok </label>
+</div>
+
+<div class="form-check">
+  <input class="form-check-input" name="laundry" type="checkbox" value="Yes" id="checkEdit2">
+  <label class="form-check-label" for="checkEdit2"> Laundry on site </label>
+</div>
+
+<div class="form-check">
+  <input class="form-check-input" name="available" type="checkbox" value="Yes" id="checkEdit3" aria-describedby="checksHelp2">
+  <label class="form-check-label" for="checkEdit3"> Available now </label>
+  <small id="checksHelp2" class="form-text text-muted">Keep in mind unchecked fields will be saved as "No"</small>
+</div>
+
+<div class="form-group">
+  <label for="descriptionEdit">Description:</label>
+  <textarea class="form-control" type="text"  placeholder="{{this.description}}" id="descriptionEdit" name="description" rows="3" aria-describedby="descriptionHelp2" required></textarea>
+  <small id="descriptionHelp2" class="form-text text-muted">Please remember to give a way for users to contact you</small>
+</div>
 
   {{#if message}}
     <div class="alert alert-danger" role="alert">{{ message }}</div>
   {{/if}}
 
   <button id="updateButton" type="submit" class="btn btn-primary">UPDATE</button>
-</form>
-
-------------
-
-  <select class="form-control" id="controlSelectAdd" name="state">
-    {{#each states}}
-      <option value="{{this.acronym}}">{{this.name}}</option>
-    {{/each}}
-  </select>
-</div>  
-
-<div class="form-group">
-  <label for="imageAdd">Images:</label>
-  <input type="file" class="form-control-file" id="imageAdd" name="photo" multiple>
-</div>
-
-<div class="form-check">
-  <input class="form-check-input" name="pets" type="checkbox" value="Yes" id="defaultCheck1">
-  <label class="form-check-label" for="defaultCheck1"> Pets ok </label>
-</div>
-
-<div class="form-check">
-  <input class="form-check-input" name="laundry" type="checkbox" value="Yes" id="defaultCheck2">
-  <label class="form-check-label" for="defaultCheck2"> Laundry on site </label>
-</div>
-
-<div class="form-check">
-  <input class="form-check-input" name="available" type="checkbox" value="Yes" id="defaultCheck3" aria-describedby="checksHelp">
-  <label class="form-check-label" for="defaultCheck3"> Available now </label>
-  <small id="checksHelp" class="form-text text-muted">Keep in mind unchecked fields will be saved as "No"</small>
-</div>
-
-<div class="form-group">
-  <label for="descriptionAdd">Description:</label>
-  <textarea class="form-control" type="text" id="descriptionAdd" name="description" rows="3" aria-describedby="descriptionHelp"></textarea>
-  <small id="descriptionHelp" class="form-text text-muted">Please remember to give a way for users to contact you</small>
-</div>
-
-  {{#if message}}
-    <div class="alert alert-danger" role="alert">{{ message }}</div>
-  {{/if}}
-
-  <button type="submit" value="SAVE" class="btn btn-primary">POST</button>
 </form>
