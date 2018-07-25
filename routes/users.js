@@ -23,8 +23,8 @@ router.post("/signup", (req, res, next) => {
 
     const { username, password, password2 } = req.body;
 
-    if (username === "" || password === "") {
-      res.render("users/newUser", { message: "Indicate username and password" });
+    if (username === "" || password === "" || password2 === "") {
+      res.render("users/newUser", { message: "No empty fields" });
       return;
     }
 
@@ -114,7 +114,19 @@ router.post('/:id/edit', (req, res, next) => {
      let userId = req.params.id;
      const { username, password, password2 } = req.body;
 
+     if (username === "" || password === "" || password2 === "") {
+      res.render("users/newUser", { message: "No empty fields" });
+      return;
+    }
+
      if (password === password2) {
+
+      User.findOne({ username })
+      .then(user => {
+         if (user !== null) {
+           res.render("users/editUser", { message: "The username already exists" });
+           return;
+       }});
 
       const salt = bcrypt.genSaltSync(bcryptSalt);
       const hashPass = bcrypt.hashSync(password, salt);
@@ -130,8 +142,6 @@ router.post('/:id/edit', (req, res, next) => {
       else {
         res.render("users/editUser", {message: "Passwords don't match", id: userId });
       }
-     
-
     
     });
 

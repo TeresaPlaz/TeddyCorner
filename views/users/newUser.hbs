@@ -1,20 +1,23 @@
-<h2>Sign up</h2>
+<h3>Sign up</h3>
 
-<form action="/users/signup" method="POST" id="form-container">
+<form action="/users/signup" method="POST">
+<div class="form-group">
   <label for="username">Username</label>
-  <input id="username" type="text" name="username" placeholder="Your username">
-  <br/><br/>
-  <label for="password">Password</label>
-  <input id="password" type="password" name="password" placeholder="Your password"> </br>
-
-  <label for="">Retype password:</label>
-  <input type="password" name="password2">
-
+  <input id="username" class="form-control" type="text" name="username" aria-describedby="usernameHelp" placeholder="Your username">
+  <small id="usernameHelp" class="form-text text-muted">Try your first name before it's taken</small>
+</div>
+<div class="form-group">
+  <label for="password1">Password</label>
+  <input id="password1" type="password" class="form-control" name="password" placeholder="Your password">
+</div>
+<div class="form-group">
+  <label for="password2">Retype password:</label>
+  <input id="password2" type="password" class="form-control" name="password2" placeholder="Don't leave it to chance">
+</div>
   {{#if message}}
-    <div class="error-message">{{ message }}</div>
+    <div class="alert alert-danger" role="alert">{{ message }}</div>
   {{/if}}
-  <br><br>
 
-  <button>Create account</button>
+  <button type="submit" class="btn btn-primary">Create account</button>
 
 </form>

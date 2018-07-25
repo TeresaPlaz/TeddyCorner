@@ -10,6 +10,9 @@ const houseSchema = new Schema({
   ownerOfPost: { type: Schema.Types.ObjectId, ref: 'Users' },
   imagePath: String,
   imageName: String ,
+  pets: { type: String, default: "No"},
+  laundry: { type: String, default: "No"},
+  available: { type: String, default: "No"},
   description: String,
 }, {
   timestamps: { createdAt: "created_at", updatedAt: "updated_at" }

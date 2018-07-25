@@ -1,25 +1,36 @@
-<h2>Edit house</h2>
-
+<h3>Edit house</h3>
 
 <form action="/Classifieds/{{this.id}}/edit" method="post" enctype="multipart/form-data">
-  <label for="">Title:</label>
-  <input type="text" name="title" value="{{this.title}}"> <br/>
 
-  <label for="">Price:</label>
-  <input type="number" name="price" value="{{this.price}}"> <br/>
+<div class="form-group">
+  <label for="titleEdit">Title:</label>
+  <input type="text" class="form-control" name="title" value="{{this.title}}" id="titleEdit">
+</div>
 
-  <label for="">Motive:</label>
-  <input type="radio" name="motive" value="Rent" checked="checked"> Rent
-  <input type="radio" name="motive" value="Sale"> Sale
-  <p>Currently set to {{this.motive}}</p>
-  <br/>
+<div class="form-group">
+  <label for="priceEdit">Price:</label>
+  <input type="number" class="form-control" id="priceEdit" name="price" value="{{this.price}}">
+</div>
 
-  <label for="">State:</label>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="motive" value="Rent" checked>
+  <label class="form-check-label">Rent</label>
+</div>
+
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="motive" value="Sale" aria-describedby="radioHelp">
+  <label class="form-check-label">Sale</label>
+  <small id="checksHelp" class="form-text text-muted">Currently set to {{this.motive}}</small>
+</div>
+
+<div class="form-group">
+  <label for="controlSelectEdit">State:</label>
   <select name="state">
     {{#each states}}
       <option value="{{this.acronym}}">{{this.name}}</option>
     {{/each}}
-  </select> <br/>
+  </select>
+</div>
 
   <label for="">Images:</label>
   <input type="file" name="photo" multiple> <br/>
@@ -28,8 +39,51 @@
   <input type="text" name="description" value="{{this.description}}"> <br/>
 
   {{#if message}}
-    <div class="error-message">{{ message }}</div>
+    <div class="alert alert-danger" role="alert">{{ message }}</div>
   {{/if}}
 
-  <button id="updateButton" type="submit">UPDATE</button>
+  <button id="updateButton" type="submit" class="btn btn-primary">UPDATE</button>
+</form>
+
+------------
+
+  <select class="form-control" id="controlSelectAdd" name="state">
+    {{#each states}}
+      <option value="{{this.acronym}}">{{this.name}}</option>
+    {{/each}}
+  </select>
+</div>  
+
+<div class="form-group">
+  <label for="imageAdd">Images:</label>
+  <input type="file" class="form-control-file" id="imageAdd" name="photo" multiple>
+</div>
+
+<div class="form-check">
+  <input class="form-check-input" name="pets" type="checkbox" value="Yes" id="defaultCheck1">
+  <label class="form-check-label" for="defaultCheck1"> Pets ok </label>
+</div>
+
+<div class="form-check">
+  <input class="form-check-input" name="laundry" type="checkbox" value="Yes" id="defaultCheck2">
+  <label class="form-check-label" for="defaultCheck2"> Laundry on site </label>
+</div>
+
+<div class="form-check">
+  <input class="form-check-input" name="available" type="checkbox" value="Yes" id="defaultCheck3" aria-describedby="checksHelp">
+  <label class="form-check-label" for="defaultCheck3"> Available now </label>
+  <small id="checksHelp" class="form-text text-muted">Keep in mind unchecked fields will be saved as "No"</small>
+</div>
+
+<div class="form-group">
+  <label for="descriptionAdd">Description:</label>
+  <textarea class="form-control" type="text" id="descriptionAdd" name="description" rows="3" aria-describedby="descriptionHelp"></textarea>
+  <small id="descriptionHelp" class="form-text text-muted">Please remember to give a way for users to contact you</small>
+</div>
+
+  {{#if message}}
+    <div class="alert alert-danger" role="alert">{{ message }}</div>
+  {{/if}}
+
+  <button type="submit" value="SAVE" class="btn btn-primary">POST</button>
 </form>

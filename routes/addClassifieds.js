@@ -18,30 +18,57 @@ router.get("/addHousing",(req,res,next) => {
 
 router.post("/addHousing", uploadCloud.single('photo'), (req, res, next) => {
 
-   const { title, price, motive, state, description } = req.body;
+   const { title, price, motive, state, pets, laundry, available, description } = req.body;
 
-   const imagePath = req.file.url;
-   const imageName = req.file.originalname;
+   if (req.file) {
+      const imagePath = req.file.url;
+      const imageName = req.file.originalname;
 
-   const ownerOfPost = req.user._id;
-   const newHouse = new HOUSING({title, price, motive, state, ownerOfPost, description, imagePath, imageName });
-   
-   req.user.classifieds.push(newHouse);
-   const classifieds = req.user.classifieds;
+      const ownerOfPost = req.user._id;
+      const newHouse = new HOUSING({title, price, motive, state, ownerOfPost, pets, laundry, available, description, imagePath, imageName });
+      
+      req.user.classifieds.push(newHouse);
+      const classifieds = req.user.classifieds;
 
-   newHouse.save((err) => {
-     if (err) {
-       res.render("houses/addHouse", { message: "Something went wrong" });
-     } else {
-        User.update({_id: ownerOfPost}, { $set: { classifieds }},{new: true})
-        .then((e) => {
-             res.redirect('/');
-        })
-         .catch((error) => {
-           console.log(error);
-         });
-     }
-   });
+      newHouse.save((err) => {
+        if (err) 
+          {
+          res.render("houses/addHouse", { message: "Something went wrong" });
+          } 
+        else 
+          {
+            User.update({_id: ownerOfPost}, { $set: { classifieds }},{new: true})
+            .then((e) => {
+                res.redirect('/');
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+          }
+      });
+  }
+    else {
+            const ownerOfPost = req.user._id;
+            const newHouse = new HOUSING({title, price, motive, state, ownerOfPost, pets, laundry, available, description});
+            
+            req.user.classifieds.push(newHouse);
+            const classifieds = req.user.classifieds;
+
+          newHouse.save((err) => {
+              if (err) {
+                res.render("houses/addHouse", { message: "Something went wrong" });
+              } 
+              else {
+                  User.update({_id: ownerOfPost}, { $set: { classifieds }},{new: true})
+                  .then((e) => {
+                      res.redirect('/');
+                  })
+                  .catch((error) => {
+                    console.log(error);
+                  });
+              }
+       });
+    }
  });
 
   router.get('/:id/Yours', (req, res, next) => {
@@ -84,7 +111,7 @@ router.post('/:id/edit', uploadCloud.single('photo'), (req, res, next) => {
 
   let houseId = req.params.id;
 
-  const { title, price, motive, state, description } = req.body;
+  const { title, price, motive, state, pets, laundry, available, description } = req.body;
 
       if (req.file) {
       const imagePath = req.file.url;

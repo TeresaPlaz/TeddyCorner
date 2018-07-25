@@ -1,4 +1,4 @@
- <h2>Edit profile</h2>
+ <h3>Edit profile</h3>
 
 <form action="/users/{{this.id}}/edit" method="post">
   <div class="form-group">
@@ -16,7 +16,7 @@
   </div>
 
   {{#if message}}
-    <div class="error-message">{{ message }}</div>
+    <div class="alert alert-danger" role="alert">{{ message }}</div>
   {{/if}}
 
   <button  id="updateButton" type="submit" class="btn btn-primary">Update</button>
