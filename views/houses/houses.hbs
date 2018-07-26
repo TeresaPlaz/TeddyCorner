@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container">
 
   <div class="row">
 
@@ -7,47 +7,32 @@
       <a class="list-group-item list-group-item-action" href="{{this.acronym}}">{{this.name}}</a>
       {{/each}}
   </div>
+  
+    <div class="col-10">
 
-    <div class="col-9">
-      {{#each house}}
-      {{#if imagePath}}
-      <img src="{{this.imagePath}}">
-      {{/if}}
-      <p>Title:{{this.title}}</p>
-      <p>Price: {{this.price}}</p>
-      <p>Motive: {{this.motive}}</p>
-      <p>State: {{this.state}}</p>
-      <p>Pets ok: {{this.pets}}</p>
-      <p>Laundry on site: {{this.laundry}}</p>
-      <p>Available now: {{this.available}}</p>
-      <p>Description: {{this.description}}.</p>
-      {{/each}}
-    </div>
-
-  </div>
-
-</div>
-
-
-
-<section>
-  <div class="container py-3">
-    <div class="card">
-      <div class="row ">
-        <div class="col-md-4">
-            <img src="https://placeholdit.imgix.net/~text?txtsize=38&txt=400%C3%97400&w=400&h=400" class="w-100">
-          </div>
-          <div class="col-md-8 px-3">
-            <div class="card-block px-3">
-              <h4 class="card-title">Lorem ipsum dolor sit amet</h4>
-              <p class="card-text">Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
-              <p class="card-text">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-              <a href="#" class="btn btn-primary">Read More</a>
+      <div class="row">
+          {{#each house}}
+            <div class="col-2">
+            <div class="card" style="width: 24rem; margin-bottom: 2rem;">    
+                {{#if imagePath}}
+                  <img src="{{this.imagePath}}" class="card-img-top img-thumbnail img-fluid">
+                {{/if}}
+              <div class="card-body">
+                  <h5 class="card-title">{{this.title}}</h5>
+                  <p class="card-text">{{this.description}}.</p>
+              </div>
+            <ul class="list-group list-group-flush">
+                  <li  class="list-group-item">Price: {{this.price}}</li>
+                  <li  class="list-group-item">Motive: {{this.motive}}</li>
+                  <li  class="list-group-item">State: {{this.state}}</li>
+                  <li  class="list-group-item">Pets ok: {{this.pets}}</li>
+                  <li  class="list-group-item">Laundry on site: {{this.laundry}}</li>
+                  <li  class="list-group-item">Available now: {{this.available}}</li>
+            </ul>
+             </div>
             </div>
-          </div>
-
-        </div>
+              {{/each}}
       </div>
     </div>
   </div>
-</section>
+</div>

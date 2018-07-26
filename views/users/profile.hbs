@@ -1,10 +1,10 @@
 <div class="container">
 <h2>Your profile</h2>
 <div>
-  <p>Username: {{this.username}}</p>
-  <p><a href="/users/{{this.id}}/edit">Edit your profile</a></p>
-  <p><a href="/Classifieds/{{this.id}}/Yours">See your classifieds</a></p>
-  <p><form action="/users/{{this.id}}/delete" method="post"> <input type="submit" value="DELETE ACCOUNT"></input></form></p>
+  <p>Username: {{userO.username}}</p>
+  <p><a href="/users/{{userO.id}}/edit">Edit your profile</a></p>
+  <p><a href="/Classifieds/{{userO.id}}/Yours">See your classifieds</a></p>
+  <p><form action="/users/{{userO.id}}/delete" method="post"> <input type="submit" value="DELETE ACCOUNT"></input></form></p>
 </div>
 
 <a href="/">Go back</a>

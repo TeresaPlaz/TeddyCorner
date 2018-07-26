@@ -8,11 +8,12 @@ const uploadCloud    = require('../config/cloudinary');
 const User           = require('../models/User');
 
 router.get("/addHousing",(req,res,next) => {
+  
   STATES.find().sort({name:1}).then(states => {
     if (!states) {
       return res.status(404).render('not-found');
     }
-    res.render("houses/addHouse", {states});
+    res.render("houses/addHouse", {states, user: req.user});
   });
 });
 
@@ -79,7 +80,7 @@ router.post("/addHousing", uploadCloud.single('photo'), (req, res, next) => {
         return res.status(404).render('not-found');
     }
     
-  res.render("users/YourClass", {populated});
+  res.render("users/YourClass", {populated, user: req.user});
 })
 .catch((error) => {
 console.log(error);
@@ -87,7 +88,8 @@ console.log(error);
 });
 
  router.get('/:id/edit', (req, res, next) => {
-  let houseId = req.params.id;
+  const houseId = req.params.id;
+  
   HOUSING.findById(houseId)
    .then(house => {
       if (!house) {
@@ -98,7 +100,7 @@ console.log(error);
       if (!states) {
         return res.status(404).render('not-found');
       }
-      res.render("houses/editHouse", {states, id: houseId, title: house.title, price: house.price, motive: house.motive, available: house.available, pets: house.pets, laundry: house.laundry, description: house.description});
+      res.render("houses/editHouse", {states, id: houseId, title: house.title, price: house.price, motive: house.motive, available: house.available, pets: house.pets, laundry: house.laundry, description: house.description, user: req.user});
     });
 })
 .catch((error) => {
@@ -157,7 +159,7 @@ router.post('/:id/edit', uploadCloud.single('photo'), (req, res, next) => {
 //DELETING HOUSE ROUTE
 router.post('/:id/delete', (req, res, next) => {
 
-let houseId = req.params.id;
+const houseId = req.params.id;
 HOUSING.findByIdAndRemove(houseId)
 .then(house => {
   if (!house) {

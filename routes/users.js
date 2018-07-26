@@ -84,11 +84,11 @@ router.get('/:id', (req, res, next) => {
       return res.status(404).render('not-found');
     }
    User.findById(userId)
-     .then(user => {
-            if (!user) {
+     .then(userO => {
+            if (!userO) {
               return res.status(404).render('not-found');
             }
-      res.render("users/profile", user);
+      res.render("users/profile", {userO, user: req.user});
       })
     .catch(next);
 });
@@ -97,11 +97,11 @@ router.get('/:id', (req, res, next) => {
 router.get('/:id/edit', (req, res, next) => {
       let userId = req.params.id;
       User.findById(userId)
-       .then(user => {
-          if (!user) {
+       .then(userO => {
+          if (!userO) {
             return res.status(404).render('not-found');
         }
-    res.render("users/editUser", user);
+    res.render("users/editUser", {userO, user: req.user});
   })
   .catch((error) => {
     console.log(error);

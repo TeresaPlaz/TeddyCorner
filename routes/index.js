@@ -17,7 +17,9 @@ router.get('/', (req, res, next) => {
 
 //StateRoutes
 router.get('/:state', (req, res, next) => {
-  let stateAcronym = req.params.state;
+  const stateAcronym = req.params.state;
+
+  if (req.user) {
   HOUSING.find({state: stateAcronym}).then(house => {
     if (!house) {
       return res.status(404).render('not-found');
@@ -27,10 +29,26 @@ router.get('/:state', (req, res, next) => {
       if (!states) {
         return res.status(404).render('not-found');
       }
-    res.render('houses/houses', {house, states});
+    res.render('houses/houses', {house, states, user: req.user});
     });
   })
   .catch(next);
+}
+  else {
+    HOUSING.find({state: stateAcronym}).then(house => {
+      if (!house) {
+        return res.status(404).render('not-found');
+      }
+  
+      STATES.find().sort({name:1}).then(states => {
+        if (!states) {
+          return res.status(404).render('not-found');
+        }
+      res.render('houses/houses', {house, states});
+      });
+    })
+    .catch(next);
+  }
 });
 
 module.exports = router;
