@@ -77,7 +77,7 @@ router.post("/login", passport.authenticate("local-login", {
 );
 
 //User Profile 
-router.get('/:id', (req, res, next) => {
+router.get('/:id', ensureLogin.ensureLoggedIn(), (req, res, next) => {
 
   let userId = req.params.id;
     if (!userId) { 
@@ -94,7 +94,7 @@ router.get('/:id', (req, res, next) => {
 });
 
 //GET ROUTE FOR USER PROFILE EDITING
-router.get('/:id/edit', (req, res, next) => {
+router.get('/:id/edit', ensureLogin.ensureLoggedIn(), (req, res, next) => {
       let userId = req.params.id;
       User.findById(userId)
        .then(userO => {
@@ -145,19 +145,8 @@ router.post('/:id/edit', (req, res, next) => {
     
     });
 
-//TYPE OF USER CHECKING FUNCTION, NOT YET APPLIED
-function checkRoles(role) {
-  return function(req, res, next) {
-    if (req.isAuthenticated() && req.user.role === role) {
-      return next();
-    } else {
-      res.redirect('/login');
-    }
-  };
-}
-
 //DELETING USER/ACCOUNT ROUTE
-router.post('/:id/delete', (req, res, next) => {
+router.post('/:id/delete', ensureLogin.ensureLoggedIn(), (req, res, next) => {
 
   let userId = req.params.id;
   console.log(req.params.id);

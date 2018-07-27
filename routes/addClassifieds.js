@@ -7,7 +7,7 @@ const HOUSING        = require('../models/housing');
 const uploadCloud    = require('../config/cloudinary');
 const User           = require('../models/User');
 
-router.get("/addHousing",(req,res,next) => {
+router.get("/addHousing",ensureLogin.ensureLoggedIn(), (req,res,next) => {
   
   STATES.find().sort({name:1}).then(states => {
     if (!states) {
@@ -72,7 +72,7 @@ router.post("/addHousing", uploadCloud.single('photo'), (req, res, next) => {
     }
  });
 
-  router.get('/:id/Yours', (req, res, next) => {
+  router.get('/:id/Yours', ensureLogin.ensureLoggedIn(), (req, res, next) => {
   let userId = req.params.id;
   User.findById(userId).populate('classifieds')
    .then(populated => {
@@ -87,7 +87,7 @@ console.log(error);
 });
 });
 
- router.get('/:id/edit', (req, res, next) => {
+ router.get('/:id/edit', ensureLogin.ensureLoggedIn(), (req, res, next) => {
   const houseId = req.params.id;
   
   HOUSING.findById(houseId)
@@ -145,19 +145,8 @@ router.post('/:id/edit', uploadCloud.single('photo'), (req, res, next) => {
                 
 });
 
-// //TYPE OF USER CHECKING FUNCTION, NOT YET APPLIED
-// function checkRoles(role) {
-// return function(req, res, next) {
-// if (req.isAuthenticated() && req.user.role === role) {
-//   return next();
-// } else {
-//   res.redirect('/login');
-// }
-// };
-// }
-
 //DELETING HOUSE ROUTE
-router.post('/:id/delete', (req, res, next) => {
+router.post('/:id/delete', ensureLogin.ensureLoggedIn(), (req, res, next) => {
 
 const houseId = req.params.id;
 HOUSING.findByIdAndRemove(houseId)
