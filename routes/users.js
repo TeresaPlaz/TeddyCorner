@@ -115,7 +115,7 @@ router.post('/:id/edit', (req, res, next) => {
      const { username, password, password2 } = req.body;
 
      if (username === "" || password === "" || password2 === "") {
-      res.render("users/newUser", { message: "No empty fields" });
+      res.render("users/editUser", { message: "No empty fields", user:req.user, userO: req.user});
       return;
     }
 
@@ -124,7 +124,7 @@ router.post('/:id/edit', (req, res, next) => {
       User.findOne({ username })
       .then(user => {
          if (user !== null) {
-           res.render("users/editUser", { message: "The username already exists" });
+           res.render("users/editUser", { message: "The username already exists", user:req.user, userO: req.user});
            return;
        }});
 
@@ -140,7 +140,7 @@ router.post('/:id/edit', (req, res, next) => {
             });
      }
       else {
-        res.render("users/editUser", {message: "Passwords don't match", id: userId });
+        res.render("users/editUser", {message: "Passwords don't match", id:userId, user:req.user, userO:req.user});
       }
     
     });
