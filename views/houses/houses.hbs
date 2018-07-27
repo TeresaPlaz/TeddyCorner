@@ -12,10 +12,10 @@
 
       <div class="row">
           {{#each house}}
-            <div class="col-2">
-            <div class="card" style="width: 24rem; margin-bottom: 2rem;">    
+            <div class="col-4">
+            <div class="card" style="width: 18rem; margin-bottom: 2rem;">    
                 {{#if imagePath}}
-                  <img src="{{this.imagePath}}" class="card-img-top img-thumbnail img-fluid">
+                  <img src="{{this.imagePath}}" class="card-img-top">
                 {{/if}}
               <div class="card-body">
                   <h5 class="card-title">{{this.title}}</h5>

@@ -3,6 +3,16 @@ body {
   font: "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
+img {
+  width: 200px;
+  height: 200px;
+  padding: .25rem;
+  background-color: #fff;
+  border-bottom: 1px solid #dee2e6;
+  border-radius: .25rem;
+  max-width: 100%;
+}
+
 .container {
   max-width: 1400px;
 }
