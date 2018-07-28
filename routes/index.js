@@ -8,10 +8,22 @@ const User    = require('../models/User');
 /* GET home page */
 router.get('/', (req, res, next) => {
   if (req.user) {
-  res.render('index',{user: req.user});
-  }
+    STATES.find().sort({name:1}).then(states => {
+      if (!states) {
+        return res.status(404).render('not-found');
+      }
+    res.render('index', {states, user: req.user});
+    })
+  .catch(next);
+}
   else {
-  res.render('index');
+    STATES.find().sort({name:1}).then(states => {
+      if (!states) {
+        return res.status(404).render('not-found');
+      }
+    res.render('index', {states});
+    })
+  .catch(next);
   }
 });
 

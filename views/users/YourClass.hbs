@@ -1,28 +1,30 @@
 <h2>Your Classifieds</h2>
-<div class="postContainer">
+
+  <div class="row">
+      {{#each populated.classifieds}}
+          <div class="col-sm-4">
+            <div class="card" style="margin-bottom: 2rem;">
+                  {{#if imagePath}}
+                      <img src="{{this.imagePath}}" class="card-img-top">
+                  {{/if}} 
+                    <div class="card-body">   
+                          <h5 class="card-title">{{this.title}}</h5>
+                          <p class="card-text">{{this.description}}.</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li  class="list-group-item">Price: {{this.price}}</li>
+                        <li  class="list-group-item">Motive: {{this.motive}}</li>
+                        <li  class="list-group-item">State: {{this.state}}</li>
+                        <li  class="list-group-item">Pets ok: {{this.pets}}</li>
+                        <li  class="list-group-item">Laundry on site: {{this.laundry}}</li>
+                        <li  class="list-group-item">Available now: {{this.available}}</li>
+                    </ul>
+                 <a href="/Classifieds/{{this.id}}/edit" class="btn btn-primary">Edit</a>
+                    <form action="/Classifieds/{{this.id}}/delete" method="post"> <input class="btn btn-primary" type="submit" value="DELETE"></input></form>
+           </div>
+         </div>
+      {{/each}}
+  </div>
+
+<a href="/" class="btn btn-primary">Go back</a>
     
-  {{#each populated.classifieds}}
-      <div class="actualPost"> 
-        <img src="{{this.imagePath}}"/>
-        <p>Title:{{this.title}}</p>
-        <p>Price: {{this.price}}</p>
-        <p>Motive: {{this.motive}}</p>
-        <p>State: {{this.state}}</p>
-        <p>Pets ok: {{this.pets}}</p>
-        <p>Laundry on site: {{this.laundry}}</p>
-        <p>Available now: {{this.available}}</p>
-        <p>Description: {{this.description}}.</p>
-
-    
-          <a href="/Classifieds/{{this.id}}/edit">Edit</a>
-        </p>
-        {{!-- <p><a href="/Classifieds/{{this.id}}/Yours">See your classifieds</a></p> --}}
-        <p>
-          <form action="/Classifieds/{{this.id}}/delete" method="post"> <input type="submit" value="DELETE"></input></form>
-        </p>
-      </div>
-  {{/each}}
-</div>
-
-
-<a href="/">Go back</a>
