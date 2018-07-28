@@ -1,3 +1,43 @@
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Sign up</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="/" method="POST">
+            <div class="form-group">
+              <label for="username">Username</label>
+              <input id="username" class="form-control" type="text" name="username" placeholder="Your username">
+            </div>
+            <div class="form-group">
+              <label for="password1">Password</label>
+              <input id="password1" type="password" class="form-control" name="password" placeholder="Your password">
+            </div>
+            <div class="form-group">
+              <label for="password2">Retype password:</label>
+              <input id="password2" type="password" class="form-control" name="password2" aria-describedby="passwordHelp" placeholder="Don't leave it to chance">
+               <small id="passwordHelp" class="form-text text-muted">Sup</small>
+            </div>
+            {{#if message}}
+              <div class="alert alert-danger" role="alert">{{ message }}</div>
+            {{/if}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Create account</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+{{!-- Modal finish --}}
+
 <div class="container">
 
   <div class="row">
