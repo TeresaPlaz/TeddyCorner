@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
   console.log('IronGenerator JS imported successfully!');
-  document.querySelector(".CCMcredit").innerHTML = "none";  
 
 }, false);
 

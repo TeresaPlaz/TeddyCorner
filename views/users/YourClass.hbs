@@ -1,6 +1,32 @@
-<h2>Your Classifieds</h2>
-
+<div class="container-fluid">
+    <h2 class="miniProf">Your Classifieds</h2>
   <div class="row">
+
+    <div class="col-sm-3">  
+    <div class="container miniProf2">
+        <h2>Your profile</h2>
+
+  <div class="card" style="width: 18rem;">
+    <div class="card-header">
+        Username: {{user.username}}
+    </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                <a href="/users/{{user.id}}/edit" class="btn btn-primary">Edit your profile</a>
+                </li>
+                <li class="list-group-item">
+                <form action="/users/{{user.id}}/delete" method="post">
+                <input type="submit" class="btn btn-danger" value="DELETE ACCOUNT"></input>
+                </form>
+                </li>
+            </ul>
+     </div>
+  </div>
+</div>
+
+    <div class="col-sm-9">
+
+        <div class="row">
       {{#each populated.classifieds}}
           <div class="col-sm-4">
             <div class="card" style="margin-bottom: 2rem;">
@@ -18,13 +44,17 @@
                         <li  class="list-group-item">Pets ok: {{this.pets}}</li>
                         <li  class="list-group-item">Laundry on site: {{this.laundry}}</li>
                         <li  class="list-group-item">Available now: {{this.available}}</li>
+                        <li  class="list-group-item list-group-item-action"><a href="/Classifieds/{{this.id}}/edit" class="btn btn-primary btn-lg btn-block">Edit</a></li>
+                        <li class="list-group-item list-group-item-action">
+                            <form action="/Classifieds/{{this.id}}/delete" method="post">
+                            <input class="btn btn-danger btn-lg btn-block" type="submit" value="DELETE"></input>
+                            </form>
+                        </li>
                     </ul>
-                 <a href="/Classifieds/{{this.id}}/edit" class="btn btn-primary">Edit</a>
-                    <form action="/Classifieds/{{this.id}}/delete" method="post"> <input class="btn btn-primary" type="submit" value="DELETE"></input></form>
            </div>
          </div>
       {{/each}}
+      </div>
   </div>
-
-<a href="/" class="btn btn-primary">Go back</a>
-    
+  </div>
+    </div>

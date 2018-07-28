@@ -1,12 +1,16 @@
 body {
-  padding-top: 6%; }
+  margin-top: 4%; }
 
 .toScrollParent {
-  height: 50rem;
+  height: 130%;
   overflow: hidden; }
 
+.card-img-top {
+  width: 100%;
+  height: 300px; }
+
 .toScroll {
-  height: 50%;
+  height: 470px;
   margin-right: -50px;
   /* maximum width of scrollbar */
   padding-right: 50px;
@@ -14,49 +18,46 @@ body {
   overflow-y: scroll; }
 
 .SecondSection {
-  background-color: #00171F;
-  height: 50%; }
-
-.whiteBlock {
-  height: 10%;
+  background-color: #007EA7;
+  height: 3%;
   width: 100%;
-  position: sticky;
-  background-color: white; }
+  margin: -1.5% 0 0 0;
+  position: absolute;
+  padding: 20px 0 40px 0;
+  color: white; }
 
 img {
-  width: 200px;
-  height: 200px;
   padding: .25rem;
   background-color: #fff;
   border-bottom: 1px solid #dee2e6;
-  border-radius: .25rem;
-  max-width: 100%; }
+  border-radius: .25rem; }
+
+.miniProf {
+  margin-left: 2%; }
+
+.miniProf2 {
+  margin: 2% 0 0 10%; }
 
 .container {
   max-width: 1400px; }
 
 .container-fluid {
-  padding-right: 0;
+  padding-right: 3%;
   padding-left: 0;
   margin-right: auto;
-  margin-left: auto; }
+  margin-left: auto;
+  background-color: #fafafa; }
 
 .list-group-item-action {
-  color: #007EA7; }
+  color: #003459; }
 
 iframe {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%; }
-
-.iframe-container {
-  position: relative;
-  padding-bottom: 56.25%;
-  padding-top: 35px;
-  height: 0;
-  overflow: hidden;
-  margin-bottom: -5%; }
+  height: 100%;
+  margin: 0 auto;
+  overflow: hidden; }
 
 /*# sourceMappingURL=style.css.map */
