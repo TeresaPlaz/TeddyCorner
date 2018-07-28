@@ -104,11 +104,55 @@ router.get('/:state', (req, res, next) => {
         if (!states) {
           return res.status(404).render('not-found');
         }
-      res.render('houses/houses', {house, states});
+      res.render('houses/houses', {house, states, stateAcronym});
       });
     })
     .catch(next);
   }
+});
+
+//SIGN UP POST ROUTE
+router.post("/:state", (req, res, next) => {
+
+  const { username, password, password2 } = req.body;
+
+  if (username === "" || password === "" || password2 === "") {
+    res.render("users/newUser", { message: "No empty fields" });
+    return;
+  }
+
+  if (password === password2) {
+
+    User.findOne({ username })
+    .then(user => {
+       if (user !== null) {
+         res.render("users/newUser", { message: "The username already exists" });
+         return;
+     }
+    
+  const salt = bcrypt.genSaltSync(bcryptSalt);
+  const hashPass = bcrypt.hashSync(password, salt);
+
+  const newUser = new User({
+    username,
+    password: hashPass,
+  });
+
+    newUser.save((err) => {
+      if (err) {
+        res.render("users/newUser", { message: "Something went wrong" });
+      } else {
+        res.redirect("/");
+      }
+    });
+})
+  .catch(error => {
+    next(error);
+  });
+  }  
+    else {
+      res.render("users/newUser", {message: "Passwords don't match"});
+    }  
 });
 
 module.exports = router;
