@@ -105,7 +105,7 @@ router.post('/:id/edit', (req, res, next) => {
 router.post('/:id/delete', ensureLogin.ensureLoggedIn(), (req, res, next) => {
 
   let userId = req.params.id;
-  console.log(req.params.id);
+  
   User.findByIdAndRemove(userId)
     .then(user => {
       if (!user) {
