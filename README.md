@@ -14,3 +14,5 @@ Developed using:
 Front-end: Handlebars(changing to Angular), CSS, Bootstrap, Javascript.
 Back-end: Javascript, Node.js, Express.js, MongoDB.
 Extras: Cloudinary, Heroku.
+
+Live Demo: https://myprettierlist.herokuapp.com
